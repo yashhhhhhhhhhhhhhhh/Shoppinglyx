@@ -1,0 +1,20 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Payment{% endblock title %}
+{% block main-content %}
+    <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <h1 class="mt-5">Payment Process</h1>
+                <h2>Total Payment : {{payment}}</h2>
+                {% comment %} <button id="rzp-button1"  type="submit" class="btn btn-warning pay_button">Pay</button> {% endcomment %}
+                <form action="{% url 'success ' %}" method="post">
+                    {% csrf_token %}
+            
+                    <button id="button1" class="btn btn-warning px-5">Pay</button>
+                </form>
+            </div>
+        </div>
+    </div>
+   
+{% endblock main-content %}

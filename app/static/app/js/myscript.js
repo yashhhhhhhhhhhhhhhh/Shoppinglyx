@@ -21,3 +21,65 @@ $('#slider1, #slider2, #slider3').owlCarousel({
         }
     }
 })
+
+
+$('.plus-cart').click(function(){
+    var id = $(this).attr("pid").toString();
+    var eml = this.parentNode.children[2]
+    console.log("minuscart")
+
+    $.ajax({
+        type:"GET",
+        url:"/pluscart",
+        data:{
+            prod_id:id
+        },
+        success: function(data){
+            console.log("sdds")
+
+           eml.innerText = data.quantity 
+           console.log(data.quantity)
+           document.getElementById("amount").innerText= data.amount
+           document.getElementById("total_amount").innerText= data.total_amount
+        }
+    })
+})
+
+
+
+$('.minus-cart').click(function(){
+    var id = $(this).attr("pid").toString();
+    var eml = this.parentNode.children[2]
+    $.ajax({
+        type:"GET",
+        url:"/minusecart",
+        data:{
+            prod_id:id
+        },
+        success: function(data){
+            console.log("minuscart")
+           eml.innerText = data.quantity 
+           document.getElementById("amount").innerText= data.amount
+           document.getElementById("total_amount").innerText= data.total_amount
+        }
+    })
+})
+
+
+$('.remove-cart').click(function(){
+    var id = $(this).attr("pid").toString();
+    var eml = this
+    $.ajax({
+        type:"GET",
+        url:"/removecart",
+        data:{
+            prod_id:id
+        },
+        success: function(data){
+            document.getElementById("amount").innerText= data.amount
+            document.getElementById("total_amount").innerText= data.total_amount
+            eml.parentNode.parentNode.parentNode.parentNode.remove()
+        }
+    })
+})
+
